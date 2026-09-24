@@ -178,7 +178,6 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
     expect(sourceFiles).toEqual([]);
   });
 
-  // the import is generated correctly but its never used
   it('should generate event types from references', async () => {
     const project = new Project({ useInMemoryFileSystem: true });
     const sourceFiles = await createComponentWrappers({
@@ -193,7 +192,7 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
               name: 'myEvent',
               internal: false,
               complexType: {
-                original: 'IMyComponent.Events.Detail.MyComponentClicked',
+                original: 'IButton',
                 resolved: '{ element: HTMLMyComponentElement; context: MyComponent; event: Event; }',
                 references: {
                   IButton: {
@@ -235,7 +234,7 @@ import { type IButton } from 'my-package';
 import { type MyComponentCustomEvent } from 'my-package';
 import type { StencilReactComponent, EventName } from '@stencil/react-output-target/runtime';
 
-export type MyComponentEvents = { onMyEvent: EventName<MyComponentCustomEvent<IMyComponent.Events.Detail.MyComponentClicked>> };
+export type MyComponentEvents = { onMyEvent: EventName<MyComponentCustomEvent<IButton>> };
 
 export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentEvents, Components.MyComponent> = /*@__PURE__*/ createComponent<MyComponentElement, MyComponentEvents, Components.MyComponent>({
     tagName: 'my-component',
