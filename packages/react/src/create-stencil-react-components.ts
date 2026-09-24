@@ -78,8 +78,7 @@ import type { Components } from '${stencilPackageName}/${componentsTypesDir}';
     });
 
     /**
-     * Add the @ts-ignore comment to the clientComponents import after organizeImports()
-     * to ensure the comment stays attached to the correct import.
+     * Add the @ts-ignore comment to the clientComponents import
      */
     sourceFile.insertText(
       clientComponentsImport.getStart(),
@@ -107,6 +106,7 @@ import type { Components } from '${stencilPackageName}/${componentsTypesDir}';
   }
 
   let eventsCounter = 0;
+  const importedEvents = new Set<string>();
 
   for (const component of components) {
     const tagName = component.tagName;
@@ -134,7 +134,6 @@ import type { Components } from '${stencilPackageName}/${componentsTypesDir}';
 
     const publicEvents = (component.events || []).filter((e) => e.internal === false);
     const events: ReactEvent[] = [];
-    const importedEventDetailTypes = new Set<string>();
     let importedComponentCustomEvent = false;
 
     for (const event of publicEvents) {
@@ -152,8 +151,8 @@ import type { Components } from '${stencilPackageName}/${componentsTypesDir}';
            * Global type references should not have an explicit import.
            * The type should be available globally.
            */
-          if (!isGlobalType && !importedEventDetailTypes.has(referenceKey)) {
-            importedEventDetailTypes.add(referenceKey);
+          if (!isGlobalType && !importedEvents.has(referenceKey)) {
+            importedEvents.add(referenceKey);
             sourceFile.addImportDeclaration({
               moduleSpecifier: stencilPackageName,
               namedImports: [
@@ -177,15 +176,20 @@ import type { Components } from '${stencilPackageName}/${componentsTypesDir}';
        */
       if (!importedComponentCustomEvent) {
         importedComponentCustomEvent = true;
-        sourceFile.addImportDeclaration({
-          moduleSpecifier: stencilPackageName,
-          namedImports: [
-            {
-              name: componentCustomEvent,
-              isTypeOnly: true,
-            },
-          ],
-        });
+
+        if (!importedEvents.has(componentCustomEvent)) {
+          sourceFile.addImportDeclaration({
+            moduleSpecifier: stencilPackageName,
+            namedImports: [
+              {
+                name: componentCustomEvent,
+                isTypeOnly: true,
+              },
+            ],
+          });
+        }
+
+        importedEvents.add(componentCustomEvent);
       }
 
       // Always type events using the Stencil per-component CustomEvent type.

@@ -7,35 +7,53 @@
 
 /* eslint-disable */
 
-import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
-import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { createComponent } from '@stencil/react-output-target/runtime';
 import { transformTag } from './tag-transformer.js';
 
-import { type CheckboxChangeEventDetail, type CheckboxChangeNestedEventDetail, type IMyComponent, type InputChangeEventDetail, type MyButtonCustomEvent, type MyButtonScopedCustomEvent, type MyCheckboxCustomEvent, type MyComponentCustomEvent, type MyComponentScopedCustomEvent, type MyCounterCustomEvent, type MyInputCustomEvent, type MyInputScopedCustomEvent, type MyPopoverCustomEvent, type MyRadioCustomEvent, type MyRadioGroupCustomEvent, type MyRangeCustomEvent, type OverlayEventDetail, type RadioGroupChangeEventDetail, type RangeChangeEventDetail } from "component-library";
-import type { Components } from "component-library/components";
-import { MyButtonScoped as MyButtonScopedElement, defineCustomElement as defineMyButtonScoped } from "component-library/components/my-button-scoped.js";
-import { MyButton as MyButtonElement, defineCustomElement as defineMyButton } from "component-library/components/my-button.js";
-import { MyCheckbox as MyCheckboxElement, defineCustomElement as defineMyCheckbox } from "component-library/components/my-checkbox.js";
-import { MyComplexPropsScoped as MyComplexPropsScopedElement, defineCustomElement as defineMyComplexPropsScoped } from "component-library/components/my-complex-props-scoped.js";
-import { MyComplexProps as MyComplexPropsElement, defineCustomElement as defineMyComplexProps } from "component-library/components/my-complex-props.js";
-import { MyComponentDelegatesFocus as MyComponentDelegatesFocusElement, defineCustomElement as defineMyComponentDelegatesFocus } from "component-library/components/my-component-delegates-focus.js";
-import { MyComponentScoped as MyComponentScopedElement, defineCustomElement as defineMyComponentScoped } from "component-library/components/my-component-scoped.js";
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "component-library/components/my-component.js";
-import { MyCounter as MyCounterElement, defineCustomElement as defineMyCounter } from "component-library/components/my-counter.js";
-import { MyInputScoped as MyInputScopedElement, defineCustomElement as defineMyInputScoped } from "component-library/components/my-input-scoped.js";
-import { MyInput as MyInputElement, defineCustomElement as defineMyInput } from "component-library/components/my-input.js";
-import { MyListItemScoped as MyListItemScopedElement, defineCustomElement as defineMyListItemScoped } from "component-library/components/my-list-item-scoped.js";
-import { MyListItem as MyListItemElement, defineCustomElement as defineMyListItem } from "component-library/components/my-list-item.js";
-import { MyListScoped as MyListScopedElement, defineCustomElement as defineMyListScoped } from "component-library/components/my-list-scoped.js";
-import { MyList as MyListElement, defineCustomElement as defineMyList } from "component-library/components/my-list.js";
-import { MyPopover as MyPopoverElement, defineCustomElement as defineMyPopover } from "component-library/components/my-popover.js";
-import { MyRadioGroup as MyRadioGroupElement, defineCustomElement as defineMyRadioGroup } from "component-library/components/my-radio-group.js";
-import { MyRadio as MyRadioElement, defineCustomElement as defineMyRadio } from "component-library/components/my-radio.js";
-import { MyRange as MyRangeElement, defineCustomElement as defineMyRange } from "component-library/components/my-range.js";
-import { MyToggleContent as MyToggleContentElement, defineCustomElement as defineMyToggleContent } from "component-library/components/my-toggle-content.js";
-import { MyToggle as MyToggleElement, defineCustomElement as defineMyToggle } from "component-library/components/my-toggle.js";
-import { MyTransformTest as MyTransformTestElement, defineCustomElement as defineMyTransformTest } from "component-library/components/my-transform-test.js";
+import type { Components } from 'component-library/components';
+import { MyButton as MyButtonElement, defineCustomElement as defineMyButton } from 'component-library/components/my-button.js';
+import { type MyButtonCustomEvent } from 'component-library';
+import { MyButtonScoped as MyButtonScopedElement, defineCustomElement as defineMyButtonScoped } from 'component-library/components/my-button-scoped.js';
+import { type MyButtonScopedCustomEvent } from 'component-library';
+import { MyCheckbox as MyCheckboxElement, defineCustomElement as defineMyCheckbox } from 'component-library/components/my-checkbox.js';
+import { type CheckboxChangeEventDetail } from 'component-library';
+import { type MyCheckboxCustomEvent } from 'component-library';
+import { type CheckboxChangeNestedEventDetail } from 'component-library';
+import { MyComplexProps as MyComplexPropsElement, defineCustomElement as defineMyComplexProps } from 'component-library/components/my-complex-props.js';
+import { MyComplexPropsScoped as MyComplexPropsScopedElement, defineCustomElement as defineMyComplexPropsScoped } from 'component-library/components/my-complex-props-scoped.js';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'component-library/components/my-component.js';
+import { type MyComponentCustomEvent } from 'component-library';
+import { MyComponentDelegatesFocus as MyComponentDelegatesFocusElement, defineCustomElement as defineMyComponentDelegatesFocus } from 'component-library/components/my-component-delegates-focus.js';
+import { MyComponentScoped as MyComponentScopedElement, defineCustomElement as defineMyComponentScoped } from 'component-library/components/my-component-scoped.js';
+import { type IMyComponent } from 'component-library';
+import { type MyComponentScopedCustomEvent } from 'component-library';
+import { MyCounter as MyCounterElement, defineCustomElement as defineMyCounter } from 'component-library/components/my-counter.js';
+import { type MyCounterCustomEvent } from 'component-library';
+import { MyInput as MyInputElement, defineCustomElement as defineMyInput } from 'component-library/components/my-input.js';
+import { type MyInputCustomEvent } from 'component-library';
+import { type InputChangeEventDetail } from 'component-library';
+import { MyInputScoped as MyInputScopedElement, defineCustomElement as defineMyInputScoped } from 'component-library/components/my-input-scoped.js';
+import { type MyInputScopedCustomEvent } from 'component-library';
+import { MyList as MyListElement, defineCustomElement as defineMyList } from 'component-library/components/my-list.js';
+import { MyListItem as MyListItemElement, defineCustomElement as defineMyListItem } from 'component-library/components/my-list-item.js';
+import { MyListItemScoped as MyListItemScopedElement, defineCustomElement as defineMyListItemScoped } from 'component-library/components/my-list-item-scoped.js';
+import { MyListScoped as MyListScopedElement, defineCustomElement as defineMyListScoped } from 'component-library/components/my-list-scoped.js';
+import { MyPopover as MyPopoverElement, defineCustomElement as defineMyPopover } from 'component-library/components/my-popover.js';
+import { type MyPopoverCustomEvent } from 'component-library';
+import { type OverlayEventDetail } from 'component-library';
+import { MyRadio as MyRadioElement, defineCustomElement as defineMyRadio } from 'component-library/components/my-radio.js';
+import { type MyRadioCustomEvent } from 'component-library';
+import { MyRadioGroup as MyRadioGroupElement, defineCustomElement as defineMyRadioGroup } from 'component-library/components/my-radio-group.js';
+import { type RadioGroupChangeEventDetail } from 'component-library';
+import { type MyRadioGroupCustomEvent } from 'component-library';
+import { MyRange as MyRangeElement, defineCustomElement as defineMyRange } from 'component-library/components/my-range.js';
+import { type RangeChangeEventDetail } from 'component-library';
+import { type MyRangeCustomEvent } from 'component-library';
+import { MyToggle as MyToggleElement, defineCustomElement as defineMyToggle } from 'component-library/components/my-toggle.js';
+import { MyToggleContent as MyToggleContentElement, defineCustomElement as defineMyToggleContent } from 'component-library/components/my-toggle-content.js';
+import { MyTransformTest as MyTransformTestElement, defineCustomElement as defineMyTransformTest } from 'component-library/components/my-transform-test.js';
+import type { StencilReactComponent, EventName } from '@stencil/react-output-target/runtime';
 
 export type MyButtonEvents = {
     onMyFocus: EventName<MyButtonCustomEvent<void>>,
