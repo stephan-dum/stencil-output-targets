@@ -40,12 +40,12 @@ describe('createComponentWrappers', () => {
 
 /* eslint-disable */
 
-import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
-import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { createComponent } from '@stencil/react-output-target/runtime';
 
-import type { Components } from "my-package/dist/custom-elements";
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "my-package/dist/custom-elements/my-component.js";
+import type { Components } from 'my-package/dist/custom-elements';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
+import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 
 export type MyComponentEvents = NonNullable<unknown>;
 
@@ -108,12 +108,12 @@ export { MyComponent } from "./my-component.js";
 
 /* eslint-disable */
 
-import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
-import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { createComponent } from '@stencil/react-output-target/runtime';
 
-import type { Components } from "my-package/dist/custom-elements";
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "my-package/dist/custom-elements/my-component.js";
+import type { Components } from 'my-package/dist/custom-elements';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
+import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 
 export type MyComponentEvents = NonNullable<unknown>;
 
@@ -178,6 +178,7 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
     expect(sourceFiles).toEqual([]);
   });
 
+  // the import is generated correctly but its never used
   it('should generate event types from references', async () => {
     const project = new Project({ useInMemoryFileSystem: true });
     const sourceFiles = await createComponentWrappers({
@@ -225,13 +226,14 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
 
 /* eslint-disable */
 
-import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
-import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { createComponent } from '@stencil/react-output-target/runtime';
 
-import { type MyComponentCustomEvent } from "my-package";
-import type { Components } from "my-package/dist/custom-elements";
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "my-package/dist/custom-elements/my-component.js";
+import type { Components } from 'my-package/dist/custom-elements';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
+import { type IButton } from 'my-package';
+import { type MyComponentCustomEvent } from 'my-package';
+import type { StencilReactComponent, EventName } from '@stencil/react-output-target/runtime';
 
 export type MyComponentEvents = { onMyEvent: EventName<MyComponentCustomEvent<IMyComponent.Events.Detail.MyComponentClicked>> };
 

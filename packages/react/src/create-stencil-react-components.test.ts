@@ -28,7 +28,7 @@ describe('createStencilReactComponents', () => {
     expect(result).toContain(`import { createComponent } from '@stencil/react-output-target/runtime';`);
     expect(result).toContain(`import type { StencilReactComponent } from '@stencil/react-output-target/runtime';`);
     expect(result).toContain(
-      `import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from "my-package/dist/custom-elements/my-component.js";`
+      `import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';`
     );
     expect(result).toContain(`export type MyComponentEvents = NonNullable<unknown>;`);
     expect(result)
@@ -77,7 +77,7 @@ describe('createStencilReactComponents', () => {
       customElementsDir: 'dist/components',
     });
 
-    expect(result).toContain(`import { type MyButtonCustomEvent } from "my-package";`);
+    expect(result).toContain(`import { type MyButtonCustomEvent } from 'my-package';`);
     expect(result).toContain(`onMyClick: EventName<MyButtonCustomEvent<void>>`);
     expect(result).toContain(`onMyHover: EventName<MyButtonCustomEvent<string>>`);
     expect(result).toContain(`onMyClick: 'myClick'`);
@@ -254,7 +254,7 @@ describe('createStencilReactComponents', () => {
 
     expect(result).toContain(`'use client';`);
     expect(result).toContain(`// @ts-ignore - ignore potential type issues as the project is importing itself`);
-    expect(result).toContain(`import * as clientComponents from "./client";`);
+    expect(result).toContain(`import * as clientComponents from './client';`);
     expect(result).toContain(`from '@stencil/react-output-target/ssr'`);
     expect(result).toContain(`type HydrateModule`);
     expect(result).toContain(`type SerializeShadowRootOptions`);
