@@ -1,4 +1,6 @@
-# @stencil/react-output-target
+⚠️This is just a fork of the original [@stencil/output-target](https://github.com/stenciljs/output-targets) repository! The purpose of this repo is to release a faster version of react-output-target till the [PR](https://github.com/stenciljs/output-targets/pull/847) is merged and released.
+
+# @fast-stencil/react-output-target
 
 Automate the creation of React component wrappers for your Stencil web components.
 
@@ -15,17 +17,17 @@ This package includes an output target for code generation that allows developer
 
 ### Your Stencil Component Library
 
-Install the `@stencil/react-output-target` package in your Stencil project as a development dependency:
+Install the `stencil-react-output-target` package in your Stencil project as a development dependency:
 
 ```bash
-npm install @stencil/react-output-target --save-dev
+npm install stencil-react-output-target --save-dev
 ```
 
 Configure the output target in your `stencil.config.ts` file:
 
 ```ts
 import { Config } from '@stencil/core';
-import { reactOutputTarget } from '@stencil/react-output-target';
+import { reactOutputTarget } from 'stencil-react-output-target';
 
 export const config: Config = {
   outputTargets: [
