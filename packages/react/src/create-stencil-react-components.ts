@@ -22,7 +22,6 @@ export const createStencilReactComponents = ({
   clientModule,
   serializeShadowRoot,
   transformTag,
-  withExtension = true,
 }: {
   components: ComponentCompilerMeta[];
   stencilPackageName: string;
@@ -32,9 +31,7 @@ export const createStencilReactComponents = ({
   clientModule?: string;
   serializeShadowRoot?: RenderToStringOptions['serializeShadowRoot'];
   transformTag?: boolean;
-  withExtension?: boolean;
 }) => {
-  const extension = withExtension ? '.js' : '';
   const isSSRModule = hydrateModule && clientModule;
 
   const imports: (string | false | undefined)[] = [
@@ -90,7 +87,7 @@ export const createStencilReactComponents = ({
       .filter(Boolean)
       .join(', ');
 
-    imports.push(`import { ${namedImport} } from '${stencilPackageName}/${customElementsDir}/${tagName}${extension}';`);
+    imports.push(`import { ${namedImport} } from '${stencilPackageName}/${customElementsDir}/${tagName}.js';`);
 
     const events: ReactEvent[] = [];
 
