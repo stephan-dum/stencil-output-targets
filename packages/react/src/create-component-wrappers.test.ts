@@ -42,9 +42,8 @@ describe('createComponentWrappers', () => {
 
 import React from 'react';
 import { createComponent } from '@stencil/react-output-target/runtime';
-
 import type { Components } from 'my-package/dist/custom-elements';
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component';
 import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 
 export type MyComponentEvents = NonNullable<unknown>;
@@ -110,9 +109,8 @@ export { MyComponent } from "./my-component.js";
 
 import React from 'react';
 import { createComponent } from '@stencil/react-output-target/runtime';
-
 import type { Components } from 'my-package/dist/custom-elements';
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component';
 import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 
 export type MyComponentEvents = NonNullable<unknown>;
@@ -227,21 +225,23 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
 
 import React from 'react';
 import { createComponent } from '@stencil/react-output-target/runtime';
-
 import type { Components } from 'my-package/dist/custom-elements';
-import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';
-import { type IButton } from 'my-package';
-import { type MyComponentCustomEvent } from 'my-package';
+import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component';
+import type { IButton, MyComponentCustomEvent } from 'my-package';
 import type { StencilReactComponent, EventName } from '@stencil/react-output-target/runtime';
 
-export type MyComponentEvents = { onMyEvent: EventName<MyComponentCustomEvent<IButton>> };
+export type MyComponentEvents = {
+  onMyEvent: EventName<MyComponentCustomEvent<IButton>>
+};
 
 export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentEvents, Components.MyComponent> = /*@__PURE__*/ createComponent<MyComponentElement, MyComponentEvents, Components.MyComponent>({
     tagName: 'my-component',
     elementClass: MyComponentElement,
     // @ts-ignore - ignore potential React type mismatches between the Stencil Output Target and your project.
     react: React,
-    events: { onMyEvent: 'myEvent' } as MyComponentEvents,
+    events: {
+      onMyEvent: 'myEvent'
+    } as MyComponentEvents,
     defineCustomElement: defineMyComponent
 });
 

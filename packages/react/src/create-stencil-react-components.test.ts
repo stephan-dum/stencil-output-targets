@@ -28,7 +28,7 @@ describe('createStencilReactComponents', () => {
     expect(result).toContain(`import { createComponent } from '@stencil/react-output-target/runtime';`);
     expect(result).toContain(`import type { StencilReactComponent } from '@stencil/react-output-target/runtime';`);
     expect(result).toContain(
-      `import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component.js';`
+      `import { MyComponent as MyComponentElement, defineCustomElement as defineMyComponent } from 'my-package/dist/custom-elements/my-component';`
     );
     expect(result).toContain(`export type MyComponentEvents = NonNullable<unknown>;`);
     expect(result)
@@ -77,7 +77,7 @@ describe('createStencilReactComponents', () => {
       customElementsDir: 'dist/components',
     });
 
-    expect(result).toContain(`import { type MyButtonCustomEvent } from 'my-package';`);
+    expect(result).toContain(`import type { MyButtonCustomEvent } from 'my-package';`);
     expect(result).toContain(`onMyClick: EventName<MyButtonCustomEvent<void>>`);
     expect(result).toContain(`onMyHover: EventName<MyButtonCustomEvent<string>>`);
     expect(result).toContain(`onMyClick: 'myClick'`);
@@ -156,7 +156,7 @@ describe('createStencilReactComponents', () => {
       customElementsDir: 'dist/custom-elements',
     });
 
-    expect(result).toContain(`type MyEventDetail`);
+    expect(result).toContain(`import type { MyEventDetail, MyComponentCustomEvent } from 'my-package';`);
     expect(result).toContain(`EventName<MyComponentCustomEvent<MyEventDetail>>`);
   });
 
@@ -322,7 +322,7 @@ describe('createStencilReactComponents', () => {
       serializeShadowRoot: { default: 'scoped' },
     });
 
-    expect(result).toContain(`export const serializeShadowRoot: SerializeShadowRootOptions = { "default": "scoped" };`);
+    expect(result).toContain(`export const serializeShadowRoot: SerializeShadowRootOptions = {"default":"scoped"};`);
   });
 
   it('should handle kebab-case to PascalCase conversion', () => {
@@ -394,9 +394,7 @@ describe('createStencilReactComponents', () => {
       customElementsDir: 'dist/custom-elements',
     });
 
-    const sharedTypeImports = result.match(/type SharedType/g);
-    expect(sharedTypeImports).not.toBeNull();
-    expect(sharedTypeImports!.length).toBe(1);
+    expect(result).toContain("import type { SharedType, MyComponentCustomEvent } from 'my-package';");
   });
 
   it('should handle events with multiple type references', () => {
@@ -436,8 +434,7 @@ describe('createStencilReactComponents', () => {
       customElementsDir: 'dist/custom-elements',
     });
 
-    expect(result).toContain(`type TypeA`);
-    expect(result).toContain(`type TypeB`);
+    expect(result).toContain(`import type { TypeA, TypeB, MyComponentCustomEvent } from 'my-package';`);
   });
 
   it('should handle components with no events', () => {
