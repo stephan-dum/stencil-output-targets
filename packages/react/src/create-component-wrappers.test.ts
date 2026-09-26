@@ -287,7 +287,7 @@ export const MyComponent: StencilReactComponent<MyComponentElement, MyComponentE
       hasMaxLength: 'max-length'
     },
     hydrateModule: typeof window === 'undefined' ? (import('my-package/hydrate') as Promise<HydrateModule>) : undefined,
-    clientModule: clientComponents.MyComponent as StencilReactComponent<MyComponentElement, MyComponentEvents, Components.MyComponent>,
+    clientModule: MyComponentReact as StencilReactComponent<MyComponentElement, MyComponentEvents, Components.MyComponent>,
     serializeShadowRoot,
 });
 `);
