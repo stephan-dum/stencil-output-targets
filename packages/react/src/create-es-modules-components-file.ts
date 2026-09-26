@@ -64,7 +64,6 @@ export const createEsModulesComponentsFile = async ({
     });
   }
 
-  sourceFile.organizeImports();
   sourceFile.formatText();
   await sourceFile.save();
 
